@@ -1,0 +1,75 @@
+===Database database
+
+== Table structure for table home_address
+
+|------
+|Column|Type|Null|Default
+|------
+|Owner&#039;s Email|varchar(20)|No|
+|Address Line 1|varchar(20)|No|
+|Address Line 2|varchar(20)|No|
+|Town|varchar(20)|No|
+|County/City|varchar(20)|No|
+|EIRCODE|varchar(20)|No|
+== Dumping data for table home_address
+
+|Bob@gmail.com|313 Street|sfwds|Celbridge|Co. Kildare|W23 Xk65
+|rmurt2004@gmail.com|Ceeeq|Fantasy Park|Town|sheep|W23 Xk65
+|ash@gmail.com|212|Grnish|Blanch|Dublin|W23 Xk65
+|Lightning@gmail.com|99999|BigStreet|BiggerTown|Limerick|W23-XK65
+|Sheep@gmail.com|77777|Weep|BiggerTown|Limerick|W23-XK65
+|bigemail@gmail.com|322| |Old Street|Wexford|X65Y87
+|daniel@gmail.com|43|Street Street|Clondalkin|Limerick|W23-XK65
+== Table structure for table landlord_info
+
+|------
+|Column|Type|Null|Default
+|------
+|Title|varchar(20)|No|
+|First Name(s)|varchar(20)|No|
+|Surname|varchar(20)|No|
+|Phone Number|varchar(20)|No|
+|Email Address|varchar(20)|No|
+|Date of Birth|date|No|
+|Permission to  rent properties from the council|varchar(20)|No|
+|Permission for tenants to contact the landlord  via email|varchar(20)|No|
+== Dumping data for table landlord_info
+
+|Ms|Robin|Ashens|999-999-9999|Lightning@gmail.com|2014-01-15|Y|Y
+|Mr|Mario|Mario|944-344-2345|Sheep@gmail.com|2003-04-05| | 
+|Dr|Daniel|Hannon|444-344-3444|daniel@gmail.com|2023-12-08|Y|N
+== Table structure for table tenant-landlord_contracts
+
+|------
+|Column|Type|Null|Default
+|------
+|Contract Date|varchar(20)|No|
+|Property Address|varchar(20)|No|
+|Tenant(s)|varchar(20)|No|
+|Landlord|varchar(20)|No|
+|Fee (Monthly)|varchar(20)|No|
+|Property  Door Number|varchar(20)|No|
+|Contract Length|varchar(20)|No|
+|Property  Type|varchar(20)|No|
+== Dumping data for table tenant-landlord_contracts
+
+|2024-05-07|2122 Dublin|Mario, Luigi, |Squidward|9999|999,|Month|Semi-Detached
+|2024-04-23|213 Park|Jimmy, Luigi, |Johnathan Banks|42423|332,|Permanent|Semi-Detached
+| |2122 Dublin|Jimmy, Luigi, |Bobiins Mario|323|33,|Year|Apartment
+|2024-05-14|27 Dublin|Sonic, Tails, Knuckl|Eggman|799|76,|Permanent|Apartment
+== Table structure for table tenant_info
+
+|------
+|Column|Type|Null|Default
+|------
+|Title|varchar(20)|No|
+|First Name(s)|varchar(20)|No|
+|Surname|varchar(20)|No|
+|Phone Number|varchar(20)|No|
+|//**Email Address**//|varchar(20)|No|
+== Dumping data for table tenant_info
+
+|Ms|Ashley|Maca|423-232-4343|ash@gmail.com
+|Mr|Robert|Murtagh|763-322-9099|bigemail@gmail.com
+|Mr|Bob|Hob|999-999-9999|Bob@gmail.com
+|Other|Adam|Murtagh|777-777-7777|rmurt2004@gmail.com

@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- LANDLORD TENANT MANAGEMENT SYSTEM BY ROBERT MURTAGH  -->
+        <!-- NOTE: THIS PROGRAM IS RAN THROUGH THE FILE "index.js" USING NODEJS -->
+
+
+        <link rel="stylesheet" href="dashboard.css">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>Landlord-Tenant Management System</h1>
+
+        <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'data')">Our Data</button>
+        <button class="tablinks" onclick="openTab(event, 'register')">Register/Update</button>
+        <button class="tablinks" onclick="openTab(event, 'contract')">Tenant-Landlord Contract</button>
+        </div>
+
+        <!-- This form will be used for a PUT/DELETE request -->
+        <div id="data" class="tabcontent">
+            
+
+            <div class="tab">
+                <button class="tablinks2" onclick="openTab2(event, 'tenantData')">Our tenants</button>
+                <button class="tablinks2" onclick="openTab2(event, 'landlordData')">Our landlords</button>
+                <button class="tablinks2" onclick="openTab2(event, 'contractData')">Our Contracts</button>
+            </div>        
+            <div id="tenantData" class="tabcontent2">
+
+                <form id="deleteTenant">
+                    <label class="inputs:">Delete Tenant:</label>
+                    <select id="delete1" name="delete1" required>      
+                    </select>
+                    <input type="submit" class="buttons" id="add" value="Delete">
+                    
+                </form>
+                <div id="tenantData2" class="tabcontent2"></div>
+            </div>
+            <div id="landlordData" class="tabcontent2">
+                <form id="deleteLandlord">
+                    <label class="inputs:">Delete Landlord:</label>
+                    <select id="delete2" name="delete2" required>      
+                    </select>
+                    <input type="submit" class="buttons" id="add" value="Delete">
+                   
+                </form>
+            </div>
+            <div id="contractData" class="tabcontent2">
+                <form id="deleteContract">
+                    <label class="inputs:">Delete Contract:</label>
+                    <select id="delete3" name="delete3" required>      
+                    </select>
+                    <input type="submit" class="buttons" id="add" value="Delete">
+                    
+                </form>
+            </div>
+            <div id="info"></div>
+            
+        </div>
+
+
+        <!-- ************************ POST AND PUT REQUEST SECTION OF CODE: ****************************** -->
+
+        <div id="register" class="tabcontent">
+            <div class="tab">
+                <button class="tablinks2" onclick="openTab2(event, 'regTenants')">I'm a tenant</button>
+                <button class="tablinks2" onclick="openTab2(event, 'regLandlords')">I'm a landlord</button>
+            </div>
+            <div id="regTenants" class="tabcontent2">
+                <h3>Register as a tenant</h3>
+                <h5>To update, match an existing email and press update button.</h5>
+                <form id="newTenant">
+                    <!-- Inputs for User Info table -->
+                    <h4>User Personal Details:</h4>
+                    <div id="User_Info">
+                        <div class="myForms">
+                            <label class="inputs:">Title</label>
+                                <!-- Validate title input to be Mr, Ms. Mrs, Mx, Dr or Other -->
+                            <select id="title" name="title" required>
+                                <option value="Mx">Mx</option>
+                                <option value="Ms">Ms</option>
+                                <option value="Mr">Mr</option>
+                                <option value="Mrs">Mrs</option>
+                                <option value="Miss">Miss</option>
+                                <option value="Dr">Dr</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <!-- <div id="specifyDiv">
+                            <label class="inputs:">Please Specify</label>
+                            <input id="specify" name="specify1" placeholder="Title">
+                            </div> -->
+                                
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">First Name</label>
+                                <input id="firstname" name="firstname" placeholder="First Name" required>
+                                <span class="info">Input your first name!</span>
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">Surname</label>
+                                <input id="surname" name="surname" placeholder="Surname" required>
+                                <span class="info">Input your surname!</span>
+            
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">Mobile</label>
+                            <input type="tel" id="mobile" name="mobile" placeholder="Mobile" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                            <span class="info">Match format: XXX-XXX-XXXX</span>
+                            
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">Email</label>
+                                <input id="email" name="email" placeholder="Email" required>
+                                <span class="info">Input your Email!</span>
+                            
+                        </div>
+                    </div>
+                    <!-- Inputs for Address table -->
+                    <h4>Address Details:</h4>
+                    <div id="Address">
+                        <div class="myForms">
+                            <label class="inputs:">Address Line 1</label>
+                                <input id="address1" name="address1" placeholder="Address Line 1" required>
+                                <span class="info">Input Address Line 1!</span>
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">Address Line 2</label>
+                                <input id="address2" name="address2" placeholder="Address Line 2">
+                                <span class="info">Input Address Line 2!</span>        
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">Town</label>
+                                <input id="town" name="town" placeholder="Town" required>
+                                <span class="info">Input town!</span>
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">County/City</label>
+                                <input id="city" name="city" placeholder="County/City" required>
+                                <span class="info">Input County/City!</span>           
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">Eircode</label>
+                                <input id="eircode" name="eircode" placeholder="Eircode">
+                                <span class="info">Input Eircode!</span>              
+                       </div>
+                    </div>
+     
+                    <input type="submit" class="buttons" id="addButton" value="Register">
+                    <input type="submit" class="buttons" id="updateButton" value="Update">
+                </form>
+            </div>
+            <div id="regLandlords" class="tabcontent2">
+                <h3>Register as a landlord</h3>
+                <h5>To update, match an existing email and press update button.</h5>
+                <form id="newLandlord">
+                    <!-- Inputs for User Info table -->
+                    <h4>User Personal Details:</h4>
+            
+                    <div id="User_Info">
+                        <div class="myForms">
+                            <label class="inputs:">Title</label>
+                                <!-- Validate title input to be Mr, Ms. Mrs, Mx, Dr or Other -->
+                                <select id="title" name="title1" required>
+                                    <option value="Mx">Mx</option>
+                                    <option value="Ms">Ms</option>
+                                    <option value="Mr">Mr</option>
+                                    <option value="Mrs">Mrs</option>
+                                    <option value="Miss">Miss</option>
+                                    <option value="Dr">Dr</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div id="specifyDiv">
+                                <label class="inputs:">Please Specify</label>
+                                <input id="specify" name="specify2" placeholder="Title">
+                                </div>
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">First Name</label>
+                                <input id="firstname" name="firstname1" placeholder="First Name" required>
+                                <span class="info">Input your first name!</span>
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">Surname</label>
+                                <input id="surname" name="surname1" placeholder="Surname" required>
+                                <span class="info">Input your surname!</span>
+            
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">Mobile</label>
+                                <input type="tel" id="mobile" name="mobile1" placeholder="Mobile" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                                <span class="info">Match format: XXX-XXX-XXXX</span>
+                            
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">Email</label>
+                                <input id="email" name="email1" placeholder="Email" required>
+                                <span class="info">Input your Email!</span>
+                            
+                        </div>
+                    </div>
+                    <!-- Inputs for Address table -->
+                    <h4>Address Details:</h4>
+                    <div id="Address">
+                        <div class="myForms">
+                            <label class="inputs:">Address Line 1</label>
+                                <input id="address1" name="address1_1" placeholder="Address Line 1" required>
+                                <span class="info">Input Address Line 1!</span>
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">Address Line 2</label>
+                                <input id="address2" name="address2_1" placeholder="Address Line 2">
+                                <span class="info">Input Address Line 2!</span>        
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">Town</label>
+                                <input id="town" name="town1" placeholder="Town" required>
+                                <span class="info">Input town!</span>
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">County/City</label>
+                                <input id="city" name="city1" placeholder="County/City" required>
+                                <span class="info">Input County/City!</span>           
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">Eircode</label>
+                                <input id="eircode" name="eircode1" placeholder="Eircode">
+                                <span class="info">Input Eircode!</span>              
+                       </div>
+                    </div>
+                    <h4>Additional Personal Details:</h4>
+                    <div id="additionalDetails">
+                        <div class="myForms">
+                            <label class="inputs:">Date of Birth</label>
+                                <input type="date" id = "dob" name="dob" />
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">Permission to rent properties from the council</label>
+                            <select id="rentPerm" name="rentPerm">
+                                <option value="Y">Y</option>
+                                <option value="N">N</option>
+                            </select>
+     
+                        </div>
+                        <div class="myForms">
+                            <label class="inputs:">Permission for tenants to contact landlord via email</label>
+                            <select id="emailPerm" name="emailPerm">
+                                <option value="Y">Y</option>
+                                <option value="N">N</option>
+                            </select>
+                        </div>
+            
+                     
+                    </div>
+                    <input type="submit" class="buttons" id="add2" value="Register">
+                    <input type="submit" class="buttons" id="update2" value="Update">
+                </form>
+                
+            </div>         
+        </div>
+        <div id="contract" class="tabcontent">
+        <h3>Register a Tenant-Landlord Contract</h3>
+            <form id="newContract">
+                <!-- Inputs for User Info table -->
+                <h4>User Personal Details:</h4>
+                <div id="Contract_Info">
+                    <div class="myForms">
+                        <label class="inputs:">Contract Date</label>
+                            <!-- Validate title input to be Mr, Ms. Mrs, Mx, Dr or Other -->
+                            <input type="date" id = "cdate" name="cdate">
+                    </div>
+                    <div class="myForms">
+                        <label class="inputs:">Property Address</label>
+                            <input id="pAddress" name="pAddress" placeholder="Property Address">
+                            <span class="info">Input property address!</span>
+                    </div>
+                    <div class="myForms">
+                        <label class="inputs:">No. of Tenants</label>
+                            <select id="tenantNo" name="tenantNo">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                                <div class="myForms" id = "Tenant1">
+                                    <label class="inputs:">Tenant Name</label>
+                                        <input id="tenant1" name="tenant1" placeholder="Name">
+                                        <span class="info">Input tenant name!</span>
+                                    
+                                </div>
+                                <div class="myForms" id = "Tenant2">
+                                    <label class="inputs:">Tenant Name</label>
+                                    <input id="tenant2" name="tenant2" placeholder="Name">
+                                    <span class="info">Input tenant name!</span>
+                                </div>
+                                <div class="myForms" id = "Tenant3">
+                                    <label class="inputs:">Tenant Name</label>
+                                    <input id="tenant3" name="tenant3" placeholder="Name">
+                                    <span class="info">Input tenat name!</span>
+                                </div>
+                    </div>
+                    <div class="myForms">
+                        <label class="inputs:">Landlord Name</label>
+                            <input id="landlord" name="landlord" placeholder="Name">
+                            <span class="info">Input landlord name!</span>
+                    </div>
+                    <div class="myForms">
+                        <label class="inputs:">Fee (Monthly) (€)</label>
+                            <input type="number" id="fee" name="fee" placeholder="000">
+                            <span class="info">Input fee!</span>
+                    </div>
+                    <div class="myForms">
+                        <label class="inputs:">Property Door Number</label>
+                        <input type="number" id="propertyNo" name="propertyNo" placeholder="Property Door No.">
+                        <span class="info">Input fee!</span>
+                    </div>
+                    <div class="myForms">
+                        <label class="inputs:">Contract Length</label>
+                        <select id="contractLength" name="contractLength">
+                            <option value="Month">Month</option>
+                            <option value="Year">Year</option>
+                            <option value="Permanent">Permanent</option>
+                        </select>
+                    </div>
+                    <div class="myForms">
+                        <label class="inputs:">Property Type</label>
+                            <select id="propType" name="propType">
+                                <option value="Apartment">Apartment</option>
+                                <option value="Semi-Detached">Semi-Detached</option>
+                                <option value="Detached">Detached</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <div id="specifyDiv">
+                            <label class="inputs:">Please Specify</label>
+                            <input id="specify" name="specify" placeholder="Property Type">
+                        </div>
+                    </div>
+                </div>   
+                <input type="submit" class="buttons" id="add" value="Register">
+            </form>
+        </div>
+
+
+
+       
+            
+        </div>
+
+        <script>
+            
+            //Change the main tabs:
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    //Change the sub-tabs:
+    function openTab2(evt, tabName) {
+        var i, tabcontent2, tablinks2;
+        tabcontent2 = document.getElementsByClassName("tabcontent2");
+        for (i = 0; i < tabcontent2.length; i++) {
+        tabcontent2[i].style.display = "none";
+        }
+        tablinks2 = document.getElementsByClassName("tablinks2");
+        for (i = 0; i < tablinks2.length; i++) {
+        tablinks2[i].className = tablinks2[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+
+        //For help with get request
+        if(tabName === 'tenantData') get('tenantData',"tenants");
+        if(tabName === 'landlordData') get('landlordData', "landlords");
+        if(tabName === 'contractData') get('contractData',"contracts");
+    }
+//Retrieve Section of CRUD
+function get(idVal, url)
+{
+   
+    $.ajax({
+        type: "GET",
+        url: 'http://localhost:8080/api/'+url
+    })
+    .done(function (data) {
+        //var data2 = JSON.parse(data);
+        //populateSelect(data2);
+
+        //alert(idVal);
+        let text = "";
+        text = JSON.stringify(data, null, 2); 
+        //Print out response in code
+        document.getElementById("info").innerText = text; 
+
+        populateSelect(text,url)
+    });
+}
+//Used to fill the delete select option with data from GET
+function populateSelect(data,url) {
+    var data1 = JSON.parse(data);
+    //alert(data);
+for (var i = 0; i < data1.length; i++) {
+    if(url === "tenants")
+    {
+    var selectOptions = document.getElementById("delete1");
+    if(i == 0)selectOptions.innerHTML = "";
+    
+    var option = document.createElement("option");
+    option.text = data1[i]["Email Address"]; 
+   
+    selectOptions.appendChild(option);
+    }
+    else if(url === "landlords")
+    {
+    var selectOptions = document.getElementById("delete2");
+    if(i == 0) selectOptions.innerHTML = "";
+
+    var option = document.createElement("option");
+    option.text = data1[i]["Email Address"]; // Assuming 'name' is a field in your MySQL table
+
+    selectOptions.appendChild(option);
+    }
+    else if(url === "contracts")
+    {
+    var selectOptions = document.getElementById("delete3");
+    if(i == 0) selectOptions.innerHTML = "";
+    
+    var option = document.createElement("option");
+    option.text = data1[i]["Property Address"]; 
+    selectOptions.appendChild(option);
+    }
+}
+}
+
+
+
+
+   
+$(document).ready(function(){
+
+    //*************DELETE REQUESTS*********************************
+    
+    $('#deleteTenant').unbind('submit').submit(function (e) {
+        alert("DELETE1");
+
+    var user = {email: $('select[name=delete1]').val()  }
+
+    $.ajax({
+        type: 'DELETE',
+        url: 'http://localhost:8080/api/tenants',
+        data: user
+    })
+    .done(function (data) {
+    openTab2(event, 'tenantData')
+
+    });
+    e.preventDefault();                
+    });
+
+    $('#deleteLandlord').unbind('submit').submit(function (e) {
+        alert("DELETE2");
+
+    var user = {email: $('select[name=delete2]').val()  }
+
+    $.ajax({
+        type: 'DELETE',
+        url: 'http://localhost:8080/api/landlords',
+        data: user
+    })
+    .done(function (data) {
+    openTab2(event, 'tenantData')
+
+    });
+
+    e.preventDefault();                
+    });
+    $('#deleteContract').unbind('submit').submit(function (e) {
+        alert("DELETE3");
+
+    var user = {email: $('select[name=delete3]').val()  }
+
+    $.ajax({
+        type: 'DELETE',
+        url: 'http://localhost:8080/api/contracts',
+        data: user
+    })
+    .done(function (data) {
+    openTab2(event, 'tenantData')
+
+    });
+    e.preventDefault();                
+    });
+
+    //*************POST REQUESTS*********************************
+    $('#addButton').click( function(e) {
+
+    $('#newTenant').unbind('submit').submit(function (e) {
+        alert("POST");
+
+    var user = {   
+        title: $('select[name=title]').val(),
+        firstname: $('input[name=firstname]').val(),
+        surname: $('input[name=surname]').val(),
+        mobile: $('input[name=mobile]').val(),
+        email: $('input[name=email]').val(),
+
+        address1: $('input[name=address1]').val(),
+        address2: $('input[name=address2]').val(),
+        town: $('input[name=town]').val(),
+        city: $('input[name=city]').val(),
+        eircode: $('input[name=eircode]').val(),        
+    };
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:8080/api/tenants',
+        data: user
+    })
+        .done(function (data) {
+            $('#responseData').val(JSON.stringify(data, null, 2));
+            // reset the form for next time!
+            $('select[name=title]').val('');
+            $('input[name=firstname]').val('');
+            $('input[name=surname]').val('');
+            $('input[name=mobile]').val('');
+            $('input[name=email]').val('');
+            $('input[name=address1]').val('');
+            $('input[name=address2]').val('');
+            $('input[name=town]').val('');
+            $('input[name=city]').val('');
+            $('input[name=eircode]').val('');
+
+        });
+    e.preventDefault();                
+    });
+});
+$('#add2').click( function(e) {
+    //POST REQUEST FOR NEW LANDLORD
+
+    $('#newLandlord').unbind('submit').submit(function (e) {
+        alert("POST");
+
+    var user = {  
+        title: $('select[name=title1]').val(),
+        firstname: $('input[name=firstname1]').val(),
+        surname: $('input[name=surname1]').val(),
+        mobile: $('input[name=mobile1]').val(),
+        email: $('input[name=email1]').val(),
+
+        address1: $('input[name=address1_1]').val(),
+        address2: $('input[name=address2_1]').val(),
+        town: $('input[name=town1]').val(),
+        city: $('input[name=city1]').val(),
+        eircode: $('input[name=eircode1]').val(), 
+        
+        dob: $('input[name=dob]').val(),
+        rentPerm: $('select[name=rentPerm]').val(),
+        emailPerm: $('select[name=emailPerm]').val(),
+        
+    };
+    //alert(user);
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:8080/api/landlords',
+        data: user
+    })
+        .done(function (data) {
+            $('#responseData').val(JSON.stringify(data, null, 2));
+            // reset the form for next time!
+            $('select[name=title1]').val('');
+            $('input[name=firstname1]').val('');
+            $('input[name=surname1]').val('');
+            $('input[name=mobile1]').val('');
+            $('input[name=email1]').val('');
+            $('input[name=address1_1]').val('');
+            $('input[name=address2_1]').val('');
+            $('input[name=town1]').val('');
+            $('input[name=city1]').val('');
+            $('input[name=eircode1]').val('');
+            $('input[name=dob]').val('');
+            $('select[name=rentPerm]').val('');
+            $('select[name=emailPerm]').val('');
+        });
+    e.preventDefault();                
+    });
+});
+
+    //POST REQUEST FOR NEW CONTRACT:
+
+    $('#newContract').unbind('submit').submit(function (e) {
+        alert("POST");
+
+    var user = {  
+        cdate: $('input[name=cdate]').val(),
+        pAddress: $('input[name=pAddress]').val(),
+        tenants: $('input[name=tenant1]').val()+", "+$('input[name=tenant2]').val()+", "+$('input[name=tenant3]').val(),
+        landlord: $('input[name=landlord]').val(),
+        fee: $('input[name=fee]').val(),
+        propertyNo: $('input[name=propertyNo]').val(),
+        contractLength: $('select[name=contractLength]').val(),
+        propertyType: $('select[name=propType]').val(),   
+    };
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:8080/api/contracts',
+        data: user
+    })
+        .done(function (data) {
+            //alert("poop");
+            //$('#responseData').val(JSON.stringify(data, null, 2));
+            // reset the form for next time!
+            $('input[name=cdate]').val('');
+            $('input[name=pAddress]').val('');
+            //$('input[name=tenant1,tenant2,tenant3]').val();
+            $('input[name=landlord]').val('');
+            $('input[name=fee]').val('');
+            $('input[name=propertyNo]').val('');
+            $('select[name=contractLength]').val('');
+            $('select[name=propType]').val(''); 
+
+        });
+    e.preventDefault();                
+    });
+
+    //*********************************PUT REQUEST:****************************
+    $('#updateButton').click( function(e) {
+        alert("put");
+        $('#newTenant').unbind('submit').submit(function (e) {
+        alert("PUT");
+
+    var user = {   
+        title: $('select[name=title]').val(),
+        firstname: $('input[name=firstname]').val(),
+        surname: $('input[name=surname]').val(),
+        mobile: $('input[name=mobile]').val(),
+        email: $('input[name=email]').val(),
+
+        address1: $('input[name=address1]').val(),
+        address2: $('input[name=address2]').val(),
+        town: $('input[name=town]').val(),
+        city: $('input[name=city]').val(),
+        eircode: $('input[name=eircode]').val(),        
+    };
+    $.ajax({
+        type: 'PUT',
+        url: 'http://localhost:8080/api/tenants',
+        data: user
+    })
+        .done(function (data) {
+            $('#responseData').val(JSON.stringify(data, null, 2));
+            // reset the form for next time!
+            $('select[name=title]').val('');
+            $('input[name=firstname]').val('');
+            $('input[name=surname]').val('');
+            $('input[name=mobile]').val('');
+            $('input[name=email]').val('');
+            $('input[name=address1]').val('');
+            $('input[name=address2]').val('');
+            $('input[name=town]').val('');
+            $('input[name=city]').val('');
+            $('input[name=eircode]').val('');
+
+        });
+    e.preventDefault();                
+    });
+});
+
+$('#update2').click( function(e) {
+    $('#newLandlord').unbind('submit').submit(function (e) {
+        alert("PUT");
+
+    var user = {  
+        title: $('select[name=title1]').val(),
+        firstname: $('input[name=firstname1]').val(),
+        surname: $('input[name=surname1]').val(),
+        mobile: $('input[name=mobile1]').val(),
+        email: $('input[name=email1]').val(),
+
+        address1: $('input[name=address1_1]').val(),
+        address2: $('input[name=address2_1]').val(),
+        town: $('input[name=town1]').val(),
+        city: $('input[name=city1]').val(),
+        eircode: $('input[name=eircode1]').val(), 
+        
+        dob: $('input[name=dob]').val(),
+        rentPerm: $('select[name=rentPerm]').val(),
+        emailPerm: $('select[name=emailPerm]').val(),
+        
+    };
+    //alert(user);
+    $.ajax({
+        type: 'PUT',
+        url: 'http://localhost:8080/api/landlords',
+        data: user
+    })
+        .done(function (data) {
+            $('#responseData').val(JSON.stringify(data, null, 2));
+            // reset the form for next time!
+            $('select[name=title1]').val('');
+            $('input[name=firstname1]').val('');
+            $('input[name=surname1]').val('');
+            $('input[name=mobile1]').val('');
+            $('input[name=email1]').val('');
+            $('input[name=address1_1]').val('');
+            $('input[name=address2_1]').val('');
+            $('input[name=town1]').val('');
+            $('input[name=city1]').val('');
+            $('input[name=eircode1]').val('');
+            $('input[name=dob]').val('');
+            $('select[name=rentPerm]').val('');
+            $('select[name=emailPerm]').val('');
+        });
+    e.preventDefault();                
+    });
+});
+
+    
+    //Used for Other for Title 
+    $("#title").change(function() {
+    if ($(this).val() == "Other") {
+        
+        $('#specifyDiv').show();
+        $('#specify').attr('required', '');
+        $('#specify').attr('data-error', 'This field is required.');
+
+    } 
+    else{
+        $('#specifyDiv').hide();
+        $('#specify').removeAttr('required');
+        $('#specify').removeAttr('data-error');
+    }
+});
+//Used for specify for property type
+    $("#propType").change(function() {
+    if ($(this).val() == "Other") {
+        
+        $('#specifyDiv').show();
+        $('#specify').attr('required', '');
+        $('#specify').attr('data-error', 'This field is required.');
+
+    } 
+    else{
+        $('#specifyDiv').hide();
+        $('#specify').removeAttr('required');
+        $('#specify').removeAttr('data-error');
+    }
+});
+});
+    //Used for specify for tenant names in contract
+    $("#tenantNo").change(function() {
+    if ($(this).val() == "2") {
+        
+        $('#Tenant2').show();
+        $('#tenant2').attr('required', '');
+        $('#tenant2').attr('data-error', 'This field is required.');
+
+        $('#Tenant3').hide();
+        $('#tenant3').removeAttr('required');
+        $('#tenant3').removeAttr('data-error');
+
+    } else if($(this).val() == "3") {
+        $('#Tenant2').show();
+        $('#tenant2').attr('required', '');
+        $('#tenant2').attr('data-error', 'This field is required.');
+
+        $('#Tenant3').show();
+        $('#tenant3').attr('required', '');
+        $('#tenant3').attr('data-error', 'This field is required.');
+    }
+    else{
+        $('#Tenant2').hide();
+        $('#tenant2').removeAttr('required');
+        $('#tenant2').removeAttr('data-error');
+
+        $('#Tenant3').hide();
+        $('#tenant3').removeAttr('required');
+        $('#tenant3').removeAttr('data-error');
+    }
+});
+
+        </script>
+
+        
+    </body>
+</html>
